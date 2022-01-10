@@ -1,0 +1,17 @@
+{
+    "name": "antoine/cart",
+    "description": "MIT",
+    "authors": [
+        {
+            "name": "Antoine07",
+            "email": "antoine.lucsko@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+          "": "src/"
+        }
+      }
+}
