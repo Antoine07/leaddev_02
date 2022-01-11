@@ -56,3 +56,10 @@ print_r("\n");
 echo (new A(new Robot))->getUse("Hello");
 print_r("\n");
 ```
+
+## Exercice
+
+En utilisant le pattern Strategy définissez trois algorithmes respectivement changement de base numérique décimale vers binaire, décimale vers hexadecimale et décimale vers une base définie en paramètre : 3, 4, ... inférieure à 13 et différente de 2.
+Créez la classe Context vue précédement et testez ce pattern dans une calsse Number qui hérite du Context. 
+
+Implémentez ce pattern dans une structure classique PHP.
