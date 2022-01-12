@@ -1,0 +1,17 @@
+{
+    "name": "antoine/08_event",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Antoine07",
+            "email": "antoine.lucsko@gmail.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.17"
+    }
+}
