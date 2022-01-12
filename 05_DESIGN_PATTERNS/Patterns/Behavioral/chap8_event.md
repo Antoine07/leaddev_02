@@ -67,7 +67,45 @@ Dans la suite nous n'aborderons pas la notion de "StopPropagation" de nos évén
 
 ### Partie 1 mise en place
 
-- Pour les données de l'exercice utiliser la classe Migration.php dans le dossier des tests.
+- Pour les données de l'exercice utiliser la classe Migration.php ci-dessous :
+
+```php
+class Migration
+{
+
+    public function setData($pdo): void
+    {
+        $faker = Faker\Factory::create();
+
+        $sql = "
+            DROP TABLE IF EXISTS users;
+        ";
+
+        $pdo->exec($sql);
+        /**
+         * @create table users
+         */
+        $sql = "
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT,
+                password TEXT,
+                address TEXT,
+                history_count SMALLINT UNSIGNED NOT NULL DEFAULT 0
+            );
+      ";
+
+        $pdo->exec($sql);
+
+        for ($i = 0; $i < 30; $i++) {
+            $email = $faker->unique()->email;
+            $pass = sha1("secret");
+            $address = "Paris";
+            $pdo->exec("INSERT INTO users (email, password, address) VALUES ('$email', '$pass', '$address')");
+        }
+    }
+}
+```
 
 La structure du projet se trouve dans le dossier Exercices dossier 08_Event de ce chapitre. Nous n'implémenterons pas d'interface pour simplifier la mise en place de ce design pattern.
 
