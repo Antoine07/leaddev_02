@@ -67,9 +67,18 @@ Dans la suite nous n'aborderons pas la notion de "StopPropagation" de nos évén
 
 ### Partie 1 mise en place
 
-- Pour les données de l'exercice utiliser la classe Migration.php ci-dessous :
+- Pour les données de l'exercice utiliser la classe Migration.php ci-après.
+
+Installez la dépendance suivante avant dans votre projet.
+
+```bash
+composer require fakerphp/faker
+```
+
+Classe Migration, utilisez pour la persistance des données SQLite.
 
 ```php
+
 class Migration
 {
 
@@ -107,13 +116,69 @@ class Migration
 }
 ```
 
-La structure du projet se trouve dans le dossier Exercices dossier 08_Event de ce chapitre. Nous n'implémenterons pas d'interface pour simplifier la mise en place de ce design pattern.
+Vous pouvez également utiliser la classe Factory suivante pour vous connectez à la base de données.
 
-La classe User est partiellement créée dans le projet. 
+```php
 
-- La méthode find récupère un objet de type User en fonction de son identifiant champ id dans la table. Elle est auto-hydrater par la méthode fetchObjet de PDO.
+class FactoryPDO
+{
+    private static $pdo = null;
+
+    private static $defaults = [
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
+        ];
+
+    public static function build(string $dsn, string $username, string $password):\PDO{
+
+        self::$pdo = new \PDO($dsn,
+            $username, $password,
+            self::$defaults
+        );
+
+        return self::$pdo;
+    }
+
+    public static function buildSqlite(string $dsn):\PDO{
+        
+         return self::$pdo = new \PDO($dsn);
+    }
+
+    public static function reset():void{ self::$pdo = null ;}
+}
+
+```
+
+Pour se connecter à la base de données pour gérer la persistance voyez l'exemple qui suit.
+
+```php
+// pour se connecter à la base de données, dans ce cas SQLite crée automatiquement 
+ $pdo = FactoryPDO::buildSqlite("sqlite:" . __DIR__ . "/_data/database.db");
+```
+
+La structure du projet sera classique, dossier src namespace etc,
+
+
+Créez une classe User elle utilisera une instance de PDO pour persister les données. Voyez les features de cette classe ci-desous :
+
+- La méthode **find** récupère un objet de type User en fonction de son identifiant champ id dans la table. Elle est auto-hydrater par la méthode fetchObjet de PDO.
+
+```php
+// permet d'hydrater (auto-hydrater) la classe User avec ses méthodes protected :
+/**
+protected $id;
+protected $email;
+protected $history_count;
+protected $dsn ;
+*/
+$prepare->fetchObject(User::class, [$this->dsn]);
+```
 
 - La méthode all retourne l'ensemble des users dans un tableau sous forme d'objet de type User.
+
+```php
+$prepare->fetchAll(\PDO::FETCH_CLASS);
+```
 
 ### Partie 2 création de la méthode persist
 
