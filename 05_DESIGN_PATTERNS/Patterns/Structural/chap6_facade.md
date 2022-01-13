@@ -58,10 +58,7 @@ class Post extends AbstractFacade
         return ['post', new \PDO('sqlite:./database.sqlite') ];
     }
 }
-```
 
-Dans l'application nous pourrions alors instancier la classe Post de manière extrêmement simple :
-
-```php
+// lorsqu'on appelle Post qui ne possède pas la méthode all => on déclache __callStatic
 Post::all();
 ```
