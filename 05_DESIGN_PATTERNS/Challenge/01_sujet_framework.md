@@ -4,7 +4,13 @@ Vous allez par équipe de 2 créez votre propre Framework. Ce projet doit-être 
 
 Dans un premier temps vous devez mettre en place la structure du Framework.
 
-Nous utiliserons Apache2 pour la gestion du serveur.
+Nous utiliserons la simulation du serveur par PHP 
+
+```php
+php -S localhost:8000 -t public/
+```
+
+Attention, vous devez avoir un index.php dans le dossier public.
 
 Vous n'êtes pas obligé de mettre une base de données en place pour ce projet.
 
