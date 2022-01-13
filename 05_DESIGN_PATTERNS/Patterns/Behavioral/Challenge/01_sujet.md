@@ -23,12 +23,12 @@ En utilisant la notion de générateur, calculer les :
 
 ## 2. Observer
 
-1. Créez une classe **Passager** qui sera observé par un Observer **Chance** et qui notifiera la chance que cette personne a de survivre sur le Titanic selon qu'elle est une femme ou un homme.
+1. Créez une classe **Passenger** qui sera observé par un Observer **Chance** et qui notifiera la chance que cette personne a de survivre sur le Titanic selon qu'elle est une femme ou un homme.
 
 
 2. Créez un autre Observer qui aura une meilleur granularité et qui donnera la chance de survi selon que l'on est un homme et que l'on est dans une classe donnée, même chose pour les femmes.
 
 ```php
-$passager = new Passeger();
+$passager = new Passenger();
 $passager->setPerson( name : "Alan", sex : "male", pclass : 2 );
 ```
