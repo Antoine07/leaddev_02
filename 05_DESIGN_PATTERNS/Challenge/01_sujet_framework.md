@@ -42,7 +42,9 @@ App/ <- l'application
 public/
     .htaccess
     index.php <-- Point d'entrée de l'application
-resources/ <-- Templating
+resources/ 
+    master.html.twig
+    index.html.twig
 src/ <-- Structure de votre Framework
 // Au nimimum vous aurez les classes métiers suivantes 
     Controller.php (Abstract controller, instanciez votre Service Container)
